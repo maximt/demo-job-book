@@ -7,11 +7,14 @@ services:
       - ./:/app:delegated
     ports:
       - '8000:80'
+    user: "1000:1000"
 
   db:
     image: mysql:latest
     # volumes:
     #   - ./db_data:/var/lib/mysql
+    ports:
+      - '33060:3306'
     environment:
       MYSQL_ROOT_PASSWORD: test
       MYSQL_DATABASE: test
