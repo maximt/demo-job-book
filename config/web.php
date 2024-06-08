@@ -48,7 +48,13 @@ $config = [
             'rules' => [
             ],
         ],
-
+        'formatter' => [
+            'class' => \yii\i18n\Formatter::class,
+            'dateFormat' => 'yyyy-MM-dd',
+            'datetimeFormat' => 'yyyy-MM-dd HH:mm',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+        ],
     ],
     'params' => $params,
 ];
