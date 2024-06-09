@@ -7,11 +7,12 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
+
 /** @var yii\web\View $this */
 /** @var app\models\search\EmployeeSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Employees';
+$this->title = 'Сотрудники';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employee-index">
@@ -24,8 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <div class="d-flex justify-content-end">
-        <?= Html::a('Добавить сотрудника', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить сотрудника', ['create'], ['class' => 'btn btn-secondary']) ?>
     </div>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
@@ -56,9 +58,11 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'jobs count
             [
                 'class' => ActionColumn::class,
+                'contentOptions' => ['class' => 'text-end', 'style' => 'width: 1%; white-space: nowrap;'],
+                'headerOptions' => ['class' => 'text-end', 'style' => 'width: 1%; white-space: nowrap;'],
                 'urlCreator' => function ($action, Employee $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                }
+                },
             ],
         ]
     ]) ?>
