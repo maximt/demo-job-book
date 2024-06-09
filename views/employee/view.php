@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
-                    'confirm' => 'Are you sure you want to delete this item?',
+                    'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                     'method' => 'post',
                 ],
             ]) ?>
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="d-flex justify-content-end">
             <?= Html::a('Добавить место работы', ['employee-job/create', 'employee_id' => $model->id], ['class' => 'btn btn-secondary']) ?>
         </div>
-    
+
         <?= GridView::widget([
             'dataProvider' => $jobsDataProvider,
             'columns' => [
