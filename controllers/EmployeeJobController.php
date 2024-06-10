@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Employee;
 use app\models\EmployeeJob;
 use app\models\EmployeeJobSearch;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -54,8 +55,10 @@ class EmployeeJobController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+                Yii::$app->session->setFlash('success', 'Сохранено');
                 return $this->redirect(['employee/view', 'id' => $employee_id]);
             }
+            Yii::$app->session->setFlash('danger', 'Не удалось создать элемент');
         } else {
             $model->loadDefaultValues();
         }
@@ -78,8 +81,12 @@ class EmployeeJobController extends Controller
         $model = $this->findModel($id);
         $model_employee = $this->findEmployeeModel($model->employee_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['employee/view', 'id' => $model->employee_id]);
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                Yii::$app->session->setFlash('success', 'Сохранено');
+                return $this->redirect(['employee/view', 'id' => $model->employee_id]);
+            }
+            Yii::$app->session->setFlash('danger', 'Не удалось редактировать элемент');
         }
 
         return $this->render('update', [
@@ -99,7 +106,11 @@ class EmployeeJobController extends Controller
     {
         $model = $this->findModel($id);
         $employee_id = $model->employee_id;
-        $model->delete();
+        if ($model->delete()) {
+            Yii::$app->session->setFlash('success', 'Удалено');
+        } else {
+            Yii::$app->session->setFlash('danger', 'Не удалось элемент');
+        }
         return $this->redirect(['employee/view', 'id' => $employee_id]);
     }
 
