@@ -51,8 +51,8 @@ $config = [
         ],
         'formatter' => [
             'class' => \yii\i18n\Formatter::class,
-            'dateFormat' => 'dd-MM-yyyy ',
-            'datetimeFormat' => 'dd-MM-yyyy HH:mm',
+            'dateFormat' => 'dd.MM.yyyy ',
+            'datetimeFormat' => 'dd.MM.yyyy HH:mm',
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
         ],
