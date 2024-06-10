@@ -55,7 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             // 'birthday',
-            // 'jobs count
+            [
+                'attribute' => 'job_count',
+                'label' => 'Записей',
+            ],
             [
                 'class' => ActionColumn::class,
                 'contentOptions' => ['class' => 'text-end', 'style' => 'width: 1%; white-space: nowrap;'],

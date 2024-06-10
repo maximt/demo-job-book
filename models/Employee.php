@@ -26,6 +26,11 @@ use yii\behaviors\TimestampBehavior;
 class Employee extends \yii\db\ActiveRecord
 {
     /**
+     * calculated field (see \app\models\EmployeeSearch)
+     * @var int
+     */
+    public $job_count;
+    /**
      * {@inheritdoc}
      */
     public static function tableName()

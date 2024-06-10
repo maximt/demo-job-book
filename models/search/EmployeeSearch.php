@@ -5,6 +5,7 @@ namespace app\models\search;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Employee;
+use yii\db\Expression;
 
 /**
  * EmployeeSearch represents the model behind the search form of `app\models\Employee`.
@@ -40,12 +41,34 @@ class EmployeeSearch extends Employee
      */
     public function search($params)
     {
-        $query = Employee::find();
+        // $query = Employee::find();
 
         // add conditions that should always apply here
 
+        $query = Employee::find()
+        ->select([
+            'employee.*',
+            new Expression('COUNT(employee_jobs.id) AS job_count')
+        ])
+        ->leftJoin('employee_jobs', 'employee.id = employee_jobs.employee_id')
+        ->groupBy('employee.id');
+        //->orderBy(new Expression('job_count ASC'));
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'attributes' => [
+                    'firstname',
+                    'surname',
+                    'lastname',
+                    'job_count' => [
+                        'asc' => ['job_count' => SORT_ASC],
+                        'desc' => ['job_count' => SORT_DESC],
+                        'label' => 'Job Count',
+                        'default' => SORT_DESC, // Set default sorting direction
+                    ],
+                ],
+            ],
         ]);
 
         $this->load($params);
