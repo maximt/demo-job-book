@@ -51,6 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::a('Добавить место работы', ['employee-job/create', 'employee_id' => $model->id], ['class' => 'btn btn-secondary']) ?>
         </div>
 
+        <?php Pjax::begin(['id' => 'pjax-employee-jobs']); ?>
+
         <?= GridView::widget([
             'dataProvider' => $jobsDataProvider,
             'columns' => [
@@ -74,5 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ],
         ]) ?>
+
+        <?php Pjax::end(); ?>
     </div>
 </div>

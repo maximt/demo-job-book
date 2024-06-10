@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-    <?php Pjax::begin(); ?>
+    <?php Pjax::begin(['id' => 'pjax-employees']); ?>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <div class="d-flex justify-content-end">
