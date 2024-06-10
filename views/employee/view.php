@@ -64,8 +64,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'yii\grid\ActionColumn',
                     'contentOptions' => ['class' => 'text-end', 'style' => 'width: 1%; white-space: nowrap;'],
                     'headerOptions' => ['class' => 'text-end', 'style' => 'width: 1%; white-space: nowrap;'],
-                    'template' => '{update} {delete}',
+                    'template' => '{view} {update} {delete}',
                     'urlCreator' => function ($action, $model, $key, $index) {
+                        if ($action === 'view') {
+                            return ['employee-job/view', 'id' => $model->id];
+                        }
                         if ($action === 'update') {
                             return ['employee-job/update', 'id' => $model->id];
                         }

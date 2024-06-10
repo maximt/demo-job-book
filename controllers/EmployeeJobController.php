@@ -44,6 +44,23 @@ class EmployeeJobController extends Controller
     }
 
     /**
+     * Displays a single EmployeeJob model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionView($id)
+    {
+        $model = $this->findModel($id);
+        $model_employee = $this->findEmployeeModel($model->employee_id);
+
+        return $this->render('view', [
+            'model' => $model,
+            'model_employee' => $model_employee
+        ]);
+    }
+
+    /**
      * Creates a new EmployeeJob model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
