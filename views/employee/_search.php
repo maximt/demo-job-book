@@ -36,7 +36,9 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'birthday')->input('date') ?>
         </div>
         <div class="col-2">
-            <?= $form->field($model, 'gender') ?>
+            <?= $form->field($model, 'gender')->dropDownList(
+                ['' => '', '0' => 'Мужской', '1' => 'Женский']
+            ) ?>
         </div>
     </div>
     <div class="form-group">
