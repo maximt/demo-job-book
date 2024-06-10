@@ -33,7 +33,7 @@ use yii\widgets\ActiveForm;
     </div>
     <div class="row">
         <div class="col-2">
-            <?= $form->field($model, 'birthday') ?>
+            <?= $form->field($model, 'birthday')->input('date') ?>
         </div>
         <div class="col-2">
             <?= $form->field($model, 'gender') ?>

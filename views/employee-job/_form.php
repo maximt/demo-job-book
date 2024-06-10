@@ -16,11 +16,14 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'employee_id')->hiddenInput([
         'value' => $model_employee->id
     ])->label(false) ?>
-
-    <?= $form->field($model, 'begin_at')->textInput() ?>
-
-    <?= $form->field($model, 'end_at')->textInput() ?>
-
+    <div class="row">
+        <div class="col">
+            <?= $form->field($model, 'begin_at')->input('date') ?>
+        </div>
+        <div class="col">
+            <?= $form->field($model, 'end_at')->input('date') ?>
+        </div>
+    </div>
     <?= $form->field($model, 'company')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
