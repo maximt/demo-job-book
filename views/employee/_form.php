@@ -12,17 +12,22 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'firstname')->textInput(['maxlength' => true]) ?>
+    <div class="row">
+        <?= $form->field($model, 'firstname')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'surname')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'lastname')->textInput(['maxlength' => true]) ?>
+    </div>
 
-    <?= $form->field($model, 'surname')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'lastname')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'birthday')->input('date') ?>
-
-    <?= $form->field($model, 'gender')->dropDownList(
-        ['0' => 'Мужской', '1' => 'Женский']
-    ) ?>
+    <div class="row">
+        <div class="col-2">
+            <?= $form->field($model, 'birthday')->input('date') ?>
+        </div>
+        <div class="col-2">
+            <?= $form->field($model, 'gender')->dropDownList(
+                ['0' => 'Мужской', '1' => 'Женский']
+            ) ?>
+        </div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
