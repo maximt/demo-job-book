@@ -95,11 +95,19 @@ class Employee extends \yii\db\ActiveRecord
         return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 
+    /**
+     * Gets query for [[EmployeeJobs]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getEmployeeJobs()
     {
         return $this->hasMany(EmployeeJob::class, ['employee_id' => 'id']);
     }
 
+    /**
+     * @return string
+     */
     public function getFullname()
     {
         return implode(' ', [$this->firstname, $this->surname, $this->lastname]);
