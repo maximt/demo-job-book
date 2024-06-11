@@ -117,4 +117,12 @@ class Employee extends \yii\db\ActiveRecord
     {
         return implode(' ', [$this->firstname, $this->surname, $this->lastname]);
     }
+
+    /**
+     * @return string
+     */
+    function getGenderLabel()
+    {
+        return ($this->gender == 0 ? 'Мужской' : 'Женский');
+    }
 }

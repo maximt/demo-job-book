@@ -35,7 +35,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'surname',
                 'lastname',
                 'birthday:date',
-                'gender',
+                [
+                    'attribute' => 'gender',
+                    'value' => $model->getGenderLabel(),
+                ],
                 'created_at:datetime',
                 'updated_at:datetime',
                 'createdBy.username',
