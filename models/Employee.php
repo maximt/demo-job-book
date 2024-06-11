@@ -110,6 +110,17 @@ class Employee extends \yii\db\ActiveRecord
         return $this->hasMany(EmployeeJob::class, ['employee_id' => 'id']);
     }
 
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
+            foreach ($this->employeeJobs as $job) {
+                $job->delete();
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @return string
      */
