@@ -39,8 +39,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'company',
             'created_at:datetime',
             'updated_at:datetime',
-            'createdBy.username',
-            'updatedBy.username',
+            [
+                'attribute' => 'createdBy.username',
+                'label' => 'Кто создал',
+            ],
+            [
+                'attribute' => 'updatedBy.username',
+                'label' => 'Кто изменил',
+            ]
         ],
     ]) ?>
 
