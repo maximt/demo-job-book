@@ -112,12 +112,22 @@ class Employee extends \yii\db\ActiveRecord
 
     public function beforeDelete()
     {
-        if (parent::beforeDelete()) {
-            foreach ($this->employeeJobs as $job) {
-                $job->delete();
+        try {
+
+            $transaction = Yii::$app->db->beginTransaction();
+            if (parent::beforeDelete()) {
+                foreach ($this->employeeJobs as $job) {
+                    $job->delete();
+                }
+                $transaction->commit();
+                return true;
             }
-            return true;
+        } catch (\Exception $e) {
+            throw $e; // throw through
         }
+
+        $transaction->rollBack();
+
         return false;
     }
 

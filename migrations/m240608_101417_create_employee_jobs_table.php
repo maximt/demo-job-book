@@ -19,6 +19,16 @@ class m240608_101417_create_employee_jobs_table extends Migration
             'end_at' => $this->date(),
             'company' => $this->string(256)->notNull(),
         ]);
+
+        $this->addForeignKey(
+            'fk-employee_jobs-employee_id',
+            '{{%employee_jobs}}',
+            'employee_id',
+            '{{%employee}}',
+            'id',
+            'CASCADE',
+            'CASCADE'
+        );
     }
 
     /**
@@ -26,6 +36,11 @@ class m240608_101417_create_employee_jobs_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey(
+            'fk-employee_jobs-employee_id',
+            '{{%employee_jobs}}'
+        );
+
         $this->dropTable('{{%employee_jobs}}');
     }
 }
