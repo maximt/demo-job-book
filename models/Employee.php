@@ -56,8 +56,12 @@ class Employee extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::class,
-            BlameableBehavior::class,
+            'timestamp' => [
+                'class' => TimestampBehavior::class
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::class
+            ],
         ];
     }
 

@@ -43,12 +43,16 @@ class EmployeeJob extends \yii\db\ActiveRecord
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
-    
+
     public function behaviors()
     {
         return [
-            TimestampBehavior::class,
-            BlameableBehavior::class,
+            'timestamp' => [
+                'class' => TimestampBehavior::class
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::class
+            ],
         ];
     }
 
