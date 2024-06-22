@@ -45,9 +45,10 @@ class Employee extends \yii\db\ActiveRecord
     {
         return [
             [['firstname', 'lastname'], 'required'],
+            [['firstname', 'surname', 'lastname'], 'string', 'max' => 255],
             [['birthday'], 'date', 'format' => 'php:Y-m-d'],
             [['gender', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
-            [['firstname', 'surname', 'lastname'], 'string', 'max' => 255],
+            [['gender'], 'in', 'range' => [0, 1]],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
         ];
