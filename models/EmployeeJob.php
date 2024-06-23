@@ -11,8 +11,8 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property int $id
  * @property int $employee_id
- * @property string $begin_at
- * @property string|null $end_at
+ * @property date $begin_at
+ * @property date|null $end_at
  * @property string $company
  * @property int|null $created_by
  * @property int|null $updated_by
@@ -37,10 +37,11 @@ class EmployeeJob extends \yii\db\ActiveRecord
         return [
             [['employee_id', 'begin_at', 'company'], 'required'],
             [['employee_id', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
-            [['begin_at', 'end_at'], 'safe'],
+            [['begin_at', 'end_at'], 'date', 'format' => 'php:Y-m-d'],
             [['company'], 'string', 'max' => 256],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
+            ['end_at', 'compare', 'compareAttribute' => 'begin_at', 'operator' => '>='],
         ];
     }
 
