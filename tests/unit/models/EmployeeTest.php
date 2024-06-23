@@ -57,4 +57,13 @@ class EmployeeTest extends Unit
         $this->assertTrue($employee->save(), 'Employee created successfully');
     }
 
+    public function testReadEmployee()
+    {
+        $this->_createEmployee();
+
+        $employee = Employee::findOne(1);
+        $this->assertNotNull($employee, 'Employee should be found');
+        $this->assertEquals('John', $employee->firstname, 'First name should be John');
+    }
+
 }
