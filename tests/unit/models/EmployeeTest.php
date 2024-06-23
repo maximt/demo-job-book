@@ -3,7 +3,9 @@
 namespace tests\unit\models;
 
 use app\models\Employee;
+use app\models\User;
 use Codeception\Test\Unit;
+use Yii;
 
 class EmployeeTest extends Unit
 {
@@ -17,6 +19,19 @@ class EmployeeTest extends Unit
         $employee->save();
 
         return $employee;
+    }
+
+    private function _createUser($id = 999)
+    {
+        $owner = new User();
+        $owner->id = $id;
+        $owner->username = "user{$id}";
+        $owner->auth_key = '123456';
+        $owner->password_hash = '123456';
+        $owner->email = "user{$id}@example.com";
+        $owner->save();
+
+        return $owner;
     }
 
     public function testValidation()
@@ -93,6 +108,27 @@ class EmployeeTest extends Unit
 
         $deletedEmployee = Employee::findOne(1);
         $this->assertNull($deletedEmployee, 'Employee should not be found');
+    }
+
+    public function testBlameableBehavior()
+    {
+        // created_by
+
+        $owner = $this->_createUser(999);
+        Yii::$app->user->setIdentity($owner);
+
+        $employee = $this->_createEmployee();
+        $this->assertEquals(999, $employee->created_by, 'created_by should be set to current user ID');
+        $this->assertEquals(999, $employee->updated_by, 'updated_by should be set to current user ID');
+
+        // updated_by
+
+        $owner2 = $this->_createUser(777);
+        Yii::$app->user->setIdentity($owner2);
+
+        $employee->firstname = 'Jane';
+        $employee->save();
+        $this->assertEquals(777, $employee->updated_by, 'updated_by should be updated to current user ID');
     }
 
 }
