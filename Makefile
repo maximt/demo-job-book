@@ -12,5 +12,8 @@ test:
 shell:
 	docker compose exec php /bin/bash
 
+stop:
+	docker compose stop
+
 down:
 	docker compose down
