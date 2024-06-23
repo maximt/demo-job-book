@@ -1,13 +1,12 @@
 <?php
 
-namespace tests\unit\models;
+namespace models;
 
+use Yii;
 use app\models\Employee;
 use app\models\User;
-use Codeception\Test\Unit;
-use Yii;
 
-class EmployeeTest extends Unit
+class EmployeeTest extends \Codeception\Test\Unit
 {
 
     private function _createEmployee()
