@@ -81,4 +81,18 @@ class EmployeeTest extends Unit
         $this->assertEquals('Jane', $updatedEmployee->firstname, 'First name should be Jane');
     }
 
+    public function testDeleteEmployee()
+    {
+        $this->_createEmployee();
+
+        $employee = Employee::findOne(1);
+        $this->assertNotNull($employee, 'Employee should be found');
+
+        $deleted_count = $employee->delete();
+        $this->assertTrue($deleted_count > 0, 'Employee should be deleted successfully');
+
+        $deletedEmployee = Employee::findOne(1);
+        $this->assertNull($deletedEmployee, 'Employee should not be found');
+    }
+
 }
