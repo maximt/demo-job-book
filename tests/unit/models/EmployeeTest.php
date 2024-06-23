@@ -131,4 +131,18 @@ class EmployeeTest extends Unit
         $this->assertEquals(777, $employee->updated_by, 'updated_by should be updated to current user ID');
     }
 
+    public function testTimestampBehavior()
+    {
+        // created_at
+        $employee = $this->_createEmployee();
+        $this->assertNotNull($employee->created_at, 'created_at should be set');
+        $this->assertNotNull($employee->updated_at, 'updated_at should be set');
+
+        // updated_at
+        $employee->firstname = 'Jane';
+        sleep(1); // pause before updating for different timestamps in updated_at and created_at
+        $employee->save();
+        $this->assertNotEquals($employee->created_at, $employee->updated_at, 'updated_at should be updated');
+    }
+
 }
