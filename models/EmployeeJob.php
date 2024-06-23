@@ -41,7 +41,7 @@ class EmployeeJob extends \yii\db\ActiveRecord
             [['company'], 'string', 'max' => 256],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
-            ['end_at', 'compare', 'compareAttribute' => 'begin_at', 'operator' => '>='],
+            ['end_at', 'compare', 'compareAttribute' => 'begin_at', 'operator' => '>='], // begin_at <= end_at
         ];
     }
 
