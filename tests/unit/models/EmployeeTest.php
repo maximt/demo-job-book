@@ -45,4 +45,16 @@ class EmployeeTest extends Unit
         $this->assertTrue($employee->validate(['birthday']));
     }
 
+    public function testCreateEmployee()
+    {
+        $employee = new Employee();
+        $employee->firstname = 'John';
+        $employee->surname = 'Doe';
+        $employee->lastname = 'Smith';
+        $employee->birthday = '1980-01-01';
+        $employee->gender = 0;
+
+        $this->assertTrue($employee->save(), 'Employee created successfully');
+    }
+
 }
